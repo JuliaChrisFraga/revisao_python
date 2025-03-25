@@ -69,8 +69,9 @@ def calculo_multa(peso):
 # Quantidade de latas: 1, Quantidade de galões: 1
 # Preço total: R$ 105.00
 
-def calcular_tinta(tamanho):
+def calcular_tinta():
     pass
+
 
 
 
@@ -262,7 +263,6 @@ def estatisticas_numeros(n):
     maior = max(n)
     soma = sum(n)
     return (menor, maior, soma)
-        # gepeto
 
 
 
@@ -292,26 +292,28 @@ def validar_nota():
 # "Erro: A senha não pode ser igual ao nome de usuário. Tente novamente."
 # "Usuário e senha cadastrados com sucesso!"
 def validar_usuario_senha():
-    while True:
-        usuario = input("Digite o nome de usuário: ")
-        senha = input("Digite a senha: ")
-
-        if usuario == senha:
-            print("Erro: A senha não pode ser igual ao nome de usuário. Tente novamente.")
-        else:
-            return "Usuário e senha cadastrados com sucesso!"
-
+    pass
 
 
 # 18. Faça um Programa que calcule a média aritmética de um conjunto de N notas.
-def media_notas():
-    pass
-    # vetor
+def media_notas(notas):
+    if not notas:
+        print("Lista vazia.")
+    return sum(notas) / len(notas)
+
+
 
 # 19. Faça um programa que mostre os n termos da Série a seguir:
 #     S = 1/1 + 2/3 + 3/5 + 4/7 + 5/9 + ... + n/m. 
-def calcular_serie():
-    pass
+def calcular_serie(n):
+    i = 1
+    m = 1
+    soma = 0
+    for i in range(i, n, 1):
+        soma = soma + i / (m)
+        m = m + 2
+    return soma
+
 
 # 20. Em uma competição de ginástica, cada atleta recebe votos de sete jurados. A melhor e a pior nota são eliminadas.
 #  A sua nota fica sendo a média dos votos restantes. Você deve fazer um programa que receba o nome do ginasta e as notas 
@@ -332,12 +334,17 @@ def calcular_serie():
 # Melhor nota: 9.8
 # Pior nota: 7.0
 # Média: 8.50
-def calcular_media_ginastica(nome, n1, n2, n3, n4, n5, n6, n7):
+def calcular_media_ginastica():
     pass
 
 # 21. Faça um Programa que desenhe uma pirâmide alinhada à esquerda.
-def piramide_esquerda():
-    pass
+def piramide_esquerda(n):
+    x = ""
+    for i in range(0,n,1):
+      x = x + ("#" * (i + 1)) + "\n"
+    return x
+
+print(piramide_esquerda(3))
 
 # 22. Faça um Programa que desenhe uma pirâmide alinhada à direita.
 def piramide_direita():
