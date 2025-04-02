@@ -69,9 +69,32 @@ def calculo_multa(peso):
 # Quantidade de latas: 1, Quantidade de galões: 1
 # Preço total: R$ 105.00
 
-def calcular_tinta():
-    pass
+def calcular_tinta(metros):
+    mensagem = ""
 
+    areaComFolga = metros * 1.10
+    litrosNecessarios = areaComFolga / 6
+
+    latas = math.ceil(litrosNecessarios / 18)
+    precoLatas = latas * 80
+
+    mensagem = f"Quantidade de latas de 18L: {latas}\n"
+    mensagem = mensagem + f"Preço total: R$ {round(precoLatas, 2)}\n\n"
+
+    galoes = math.ceil(litrosNecessarios / 3.6)
+    precoGaloes = galoes * 25
+
+    mensagem = mensagem + f"Quantidade de galões de 3,6L: {galoes}\n"
+    mensagem = mensagem + f"Preço total: R$ {round(precoGaloes, 2)}\n\n"
+
+    latasMistura = math.floor(litrosNecessarios / 18)
+    tintaRestante = litrosNecessarios - (latasMistura * 18)
+    galoesMistura = math.ceil(tintaRestante / 3.6)
+    precoMistura = (latasMistura * 80) + (galoesMistura * 25)
+
+    mensagem = mensagem + f"Quantidade de latas: {latasMistura}, Quantidade de galões: {galoesMistura}\n"
+    mensagem = mensagem + f"Preço total: R$ {round(precoMistura, 2)}"
+    return mensagem
 
 
 
@@ -272,17 +295,11 @@ def estatisticas_numeros(n):
 # Erro: A nota deve estar entre 0 e 10. Tente novamente.
 # Nota válida: 5.5
 def validar_nota():
-    while True:
-        try:
-            nota = input("Digite a nota: ")  # Pede a entrada do usuário
-            nota = float(nota)  # Tenta converter a entrada para um número decimal (float)
-            
-            if 0 <= nota <= 10:
-                return f"Nota válida: {nota:.2f}"  # Retorna a nota formatada com 2 casas decimais
-            else:
-                print("Erro: A nota deve estar entre 0 e 10. Tente novamente.")
-        except ValueError:
-            print("Erro: Entrada inválida. Tente novamente.")
+        nota = float(input("Digite a nota: "))
+        if 0 <= nota <= 10:
+            return f"Nota válida: {round(nota, 2)}"
+        else:
+            return f"Erro: A nota deve estar entre 0 e 10. Tente novamente."
 
 
 
@@ -295,11 +312,13 @@ def validar_usuario_senha():
     pass
 
 
+
 # 18. Faça um Programa que calcule a média aritmética de um conjunto de N notas.
 def media_notas(notas):
     if not notas:
         print("Lista vazia.")
-    return sum(notas) / len(notas)
+    else:
+        return sum(notas) / len(notas)
 
 
 
@@ -308,11 +327,12 @@ def media_notas(notas):
 def calcular_serie(n):
     i = 1
     m = 1
-    soma = 0
-    for i in range(i, n, 1):
-        soma = soma + i / (m)
+    resultado = 0
+    for i in range(i, n+1, 1):
+        resultado = resultado + i / (m)
         m = m + 2
-    return soma
+    return round(resultado, 2)
+
 
 
 # 20. Em uma competição de ginástica, cada atleta recebe votos de sete jurados. A melhor e a pior nota são eliminadas.
@@ -334,8 +354,28 @@ def calcular_serie(n):
 # Melhor nota: 9.8
 # Pior nota: 7.0
 # Média: 8.50
-def calcular_media_ginastica():
-    pass
+
+def calcular_media_ginastica(nome, notas):
+    melhor = max(notas)
+    pior = min(notas)
+
+    notas.remove(melhor)
+    notas.remove(pior)
+    media = sum(notas)/len(notas)
+
+    mensagem = f"Atleta: {nome}\n"
+    
+    resultado = ""
+    
+    for nota in notas:
+        resultado = resultado + f"Nota: {nota}\n"
+        resultado2 = resultado + "\n" + f"Resultado final:\nAtleta: {nome}\nMelhor nota: {melhor}\nPior nota: {pior}\nMédia: {round(media,2)}"
+    return resultado2
+
+a = [9.9, 7.5, 9.5, 8.5, 9.0, 8.5, 9.7]
+print(calcular_media_ginastica("joao", a))
+
+
 
 # 21. Faça um Programa que desenhe uma pirâmide alinhada à esquerda.
 def piramide_esquerda(n):
@@ -344,20 +384,54 @@ def piramide_esquerda(n):
       x = x + ("#" * (i + 1)) + "\n"
     return x
 
-print(piramide_esquerda(3))
+
 
 # 22. Faça um Programa que desenhe uma pirâmide alinhada à direita.
-def piramide_direita():
-    pass
+def piramide_direita(n):
+    x = ""
+    for i in range(0,n,1):
+        x = x + " " * (n-i) + "#" * (i+1)
+    return x
+#faz a piramide certinho, então não sei o que tem de errado
+
+
 
 # 23. Faça um Programa que desenhe duas pirâmides lado a lado.
-def piramides_lado_a_lado():
-    pass
+def piramides_lado_a_lado(n):
+    x = ""
+    y = ""
+    for i in range(0,n,1):
+        x = x + " " * (n-i) + "#" * (i+1) + " " + y + ("#" * (i + 1)) + "\n"
+    return x
+
+
 
 # 24. Faça um Programa que calcule o troco com a menor quantidade de moedas possível.
-def calcular_troco():
-    pass
+def calcular_troco(n):
+    moedas50 = 0
+    moedas25 = 0
+    moedas10 = 0
+    moedas1 = 0
+    if (n % 50 == 0):
+        while (n % 50 == 0):
+            n = n - 50
+            moedas50 = moedas50 + 1
+    if (n % 25 == 0):
+        while (n % 25 == 0):
+            n = n - 25
+            moedas25 = moedas25 + 1
+    if (n % 10 == 0):
+        while (n % 10 == 0):
+            n = n - 10
+            moedas10 = moedas10 + 1
+    if (n % 1 == 0):
+        while (n % 1 == 0):
+            n = n - 1
+            moedas1 = moedas1 + 1
+    return {50: moedas50, 25: moedas25, 10: moedas10, 1: moedas1}
+    
+
 
 # 25. Faça um Programa que valide um número de cartão de crédito usando o algoritmo de Luhn.
-def validar_cartao():
+def validar_cartao(cartao):
     pass
