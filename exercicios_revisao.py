@@ -379,7 +379,6 @@ def calcular_media_ginastica(nome, notas):
     resultado2 = resultado + "\n" + f"Resultado final:\nAtleta: {nome}\nMelhor nota: {melhor}\nPior nota: {pior}\nMédia: {round(media,2)}"
     return resultado2
 
-#arrumado, falta commit
 
 
 # 21. Faça um Programa que desenhe uma pirâmide alinhada à esquerda.
@@ -397,7 +396,6 @@ def piramide_direita(n):
     for i in range(0,n,1):
         x = x + " " * (n-i-1) + "#" * (i+1) + "\n"
     return x
-#falta commit
 
 
 
@@ -408,7 +406,6 @@ def piramide_lado_a_lado(n):
     for i in range(0,n,1):
         x = x + " " * (n-i-1) + "#" * (i+1) + " " + y + ("#" * (i + 1)) + "\n"
     return x
-#falta commit
 
 
 
@@ -435,7 +432,7 @@ def calcular_troco(n):
             n = n - 1
             moedas1 = moedas1 + 1
     return {50: moedas50, 25: moedas25, 10: moedas10, 1: moedas1}
-#falta commit
+
     
 
 
