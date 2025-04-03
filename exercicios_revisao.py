@@ -76,24 +76,30 @@ def calcular_tinta(metros):
     litrosNecessarios = areaComFolga / 6
 
     latas = math.ceil(litrosNecessarios / 18)
-    precoLatas = latas * 80
+    precoLatas = latas * 80.00
+    
+    precoLatas = float(precoLatas)
 
     mensagem = f"Quantidade de latas de 18L: {latas}\n"
-    mensagem = mensagem + f"Preço total: R$ {round(precoLatas, 2)}\n\n"
+    mensagem = mensagem + f"Preço total: R$ {precoLatas:.2f}\n\n"
 
     galoes = math.ceil(litrosNecessarios / 3.6)
-    precoGaloes = galoes * 25
+    precoGaloes = galoes * 25.00
+    
+    precoGaloes = float(precoGaloes)
 
     mensagem = mensagem + f"Quantidade de galões de 3,6L: {galoes}\n"
-    mensagem = mensagem + f"Preço total: R$ {round(precoGaloes, 2)}\n\n"
+    mensagem = mensagem + f"Preço total: R$ {precoGaloes:.2f}\n\n"
 
     latasMistura = math.floor(litrosNecessarios / 18)
     tintaRestante = litrosNecessarios - (latasMistura * 18)
     galoesMistura = math.ceil(tintaRestante / 3.6)
-    precoMistura = (latasMistura * 80) + (galoesMistura * 25)
+    precoMistura = (latasMistura * 80.00) + (galoesMistura * 25.00)
+    
+    precoMistura = float(precoMistura)
 
-    mensagem = mensagem + f"Quantidade de latas: {latasMistura}, Quantidade de galões: {galoesMistura}\n"
-    mensagem = mensagem + f"Preço total: R$ {round(precoMistura, 2)}"
+    mensagem = mensagem + f"Quantidade de latas: {latasMistura:.2f}, Quantidade de galões: {galoesMistura:.2f}\n"
+    mensagem = mensagem + f"Preço total: R$ {precoMistura:.2f}"
     return mensagem
 
 
@@ -359,22 +365,21 @@ def calcular_media_ginastica(nome, notas):
     melhor = max(notas)
     pior = min(notas)
 
-    notas.remove(melhor)
-    notas.remove(pior)
-    media = sum(notas)/len(notas)
-
     mensagem = f"Atleta: {nome}\n"
     
     resultado = ""
     
     for nota in notas:
         resultado = resultado + f"Nota: {nota}\n"
-        resultado2 = resultado + "\n" + f"Resultado final:\nAtleta: {nome}\nMelhor nota: {melhor}\nPior nota: {pior}\nMédia: {round(media,2)}"
+    
+    notas.remove(melhor)
+    notas.remove(pior)
+    media = sum(notas)/len(notas)
+    
+    resultado2 = resultado + "\n" + f"Resultado final:\nAtleta: {nome}\nMelhor nota: {melhor}\nPior nota: {pior}\nMédia: {round(media,2)}"
     return resultado2
 
-a = [9.9, 7.5, 9.5, 8.5, 9.0, 8.5, 9.7]
-print(calcular_media_ginastica("joao", a))
-
+#arrumado, falta commit
 
 
 # 21. Faça um Programa que desenhe uma pirâmide alinhada à esquerda.
@@ -390,19 +395,20 @@ def piramide_esquerda(n):
 def piramide_direita(n):
     x = ""
     for i in range(0,n,1):
-        x = x + " " * (n-i) + "#" * (i+1)
+        x = x + " " * (n-i-1) + "#" * (i+1) + "\n"
     return x
-#faz a piramide certinho, então não sei o que tem de errado
+#falta commit
 
 
 
 # 23. Faça um Programa que desenhe duas pirâmides lado a lado.
-def piramides_lado_a_lado(n):
+def piramide_lado_a_lado(n):
     x = ""
     y = ""
     for i in range(0,n,1):
-        x = x + " " * (n-i) + "#" * (i+1) + " " + y + ("#" * (i + 1)) + "\n"
+        x = x + " " * (n-i-1) + "#" * (i+1) + " " + y + ("#" * (i + 1)) + "\n"
     return x
+#falta commit
 
 
 
@@ -412,26 +418,27 @@ def calcular_troco(n):
     moedas25 = 0
     moedas10 = 0
     moedas1 = 0
-    if (n % 50 == 0):
-        while (n % 50 == 0):
+    if (n >= 50):
+        while (n >= 50):
             n = n - 50
             moedas50 = moedas50 + 1
-    if (n % 25 == 0):
-        while (n % 25 == 0):
+    if (n >= 25):
+        while (n >= 25):
             n = n - 25
             moedas25 = moedas25 + 1
-    if (n % 10 == 0):
-        while (n % 10 == 0):
+    if (n >= 10):
+        while (n >= 10):
             n = n - 10
             moedas10 = moedas10 + 1
-    if (n % 1 == 0):
-        while (n % 1 == 0):
+    if (n >= 1):
+        while (n >= 1):
             n = n - 1
             moedas1 = moedas1 + 1
     return {50: moedas50, 25: moedas25, 10: moedas10, 1: moedas1}
+#falta commit
     
 
 
 # 25. Faça um Programa que valide um número de cartão de crédito usando o algoritmo de Luhn.
-def validar_cartao(cartao):
+def validar_cartao_credito(cartao):
     pass
