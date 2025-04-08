@@ -7,7 +7,7 @@ from exercicios_revisao import (
     calcular_preco_carne, potencia, estatisticas_numeros,
     validar_nota, media_notas,
     calcular_serie, calcular_media_ginastica,
-    piramide_esquerda, piramide_direita, piramides_lado_a_lado,
+    piramide_esquerda, piramide_direita, piramide_lado_a_lado,
     calcular_troco, validar_cartao
 )
 
@@ -120,8 +120,6 @@ def test_media_notas():
 def test_calcular_serie():
     assert calcular_serie(3) == pytest.approx(2.27, rel=1e-2)
 
-import pytest
-
 def test_calcular_media_ginastica():
     nome = "Aparecido Parente"
     notas = [9.9, 7.5, 9.5, 8.5, 9.0, 8.5, 9.7]
@@ -153,7 +151,7 @@ def test_piramide_direita():
     assert piramide_direita(3) == "  #\n ##\n###\n"
 
 def test_piramides_lado_a_lado():
-    assert piramides_lado_a_lado(3) == "  # #\n ## ##\n### ###\n"
+    assert piramide_lado_a_lado(3) == "  # #\n ## ##\n### ###\n"
 
 def test_calcular_troco():
     assert calcular_troco(99) == {50: 1, 25: 1, 10: 2, 1: 4}

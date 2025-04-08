@@ -315,7 +315,14 @@ def validar_nota():
 # "Erro: A senha não pode ser igual ao nome de usuário. Tente novamente."
 # "Usuário e senha cadastrados com sucesso!"
 def validar_usuario_senha():
-    pass
+
+    nome = input("Informe o nome de usuário: ")
+    senha = input("Informe a senha: ")
+
+    if (nome == senha):
+        return f"Erro: A senha não pode ser igual ao nome de usuário. Tente novamente."
+    else:
+        return f"Usuário cadastrado com sucesso!"
 
 
 
@@ -437,5 +444,79 @@ def calcular_troco(n):
 
 
 # 25. Faça um Programa que valide um número de cartão de crédito usando o algoritmo de Luhn.
-def validar_cartao_credito(cartao):
-    pass
+# Desenvolva um programa que verifique se um número de cartão de crédito é válido, conforme sua bandeira.
+# 	  American Express 	MasterCard 		Visa
+# Dígitos	  15 dígitos       	16 dígitos              13 e 16 dígitos
+# Inicio	  34 ou 37		51, 52, 53, 54 ou 55	4
+
+# Além disso, os números de cartão de crédito também têm um “checksum” embutido, uma relação matemática entre pelo menos um número e outros. Essa soma de verificação permite que os computadores (ou humanos que gostam de matemática) detectem erros de digitação (por exemplo, transposições), se não números fraudulentos, sem ter que consultar um banco de dados, que pode ser lento.
+# Então, a maioria dos cartões usa um algoritmo inventado por Hans Peter Luhn, da IBM. De acordo com o algoritmo de Luhn, você pode determinar se um número de cartão de crédito é (sintaticamente) válido da seguinte maneira:
+# Passo 1. Multiplique alternadamente o digitos fazendo a leitura da direta para a esquerda por 2, começando com o penúltimo dígito do número e, em seguida, some os dígitos desses produtos.
+# Passo 2. Adicione essa soma à soma dos dígitos que não foram multiplicados por 2.
+# Passo 3. Se o último dígito do total for 0 (ou, mais formalmente, se o módulo total 10 for congruente com 0), o número é válido!
+
+# Parece confuso, mas a lógica é simples!
+# Exemplo:
+# 4 0 0 3 6 0 0 0 0 0 0 0 0 0 1 4
+# <-----leitura da direia para a esquerda <------
+
+# Temos os digitos a serem multiplicados
+# 1 0 0 0 0 6 0 4
+
+# Passo 1: Multiplicando cada um dos dígitos selecionado por 2:
+
+# 1 • 2 + 0 • 2 + 0 • 2 + 0 • 2 + 0 • 2 + 6 • 2 + 0 • 2 + 4 • 2
+
+# Temos então:
+
+# 2 + 0 + 0 + 0 + 0 + 12 + 0 + 8
+
+# Somando os dígitos desses produtos (ou seja, não os próprios produtos):
+
+# 2 + 0 + 0 + 0 + 0 + 1 + 2 + 0 + 8 = 13
+
+# Passo 2: Adicionando a soma obtida (13) à soma dos dígitos que não foram multiplicados por 2 (começando do final):
+
+# 13 + 4 + 0 + 0 + 0 + 0 + 0 + 3 + 0 = 20
+
+# Passo 3: No resultado obtido o último dígito dessa soma (20) é 0, então trata-se de um cartão legítimo!
+
+def validar_cartao(cartao, bandeira):
+    def luhn_check(cartao):
+        soma = 0
+
+        for i in range(len(cartao) - 2, -1, -2):
+            multiplicado = int(cartao[i]) * 2
+            soma += multiplicado // 10 + multiplicado % 10
+        
+        soma += sum(int(cartao[i]) for i in range(len(cartao) - 1, -1, -2))
+
+        if (soma % 10 == 0):
+            return True
+        else:
+            return False
+
+    if (bandeira == "American Express"):
+        if (len(cartao) == 15):
+            if (cartao[0:1]) in ["34", "37"]:
+                if (luhn_check(cartao) == True):
+                    print("Cartão válido.")
+        else:
+            print("Cartão inválido. Número de dígitos não correspondem ao da bandeira American Express.")
+    if (bandeira == "Master Card"):
+        if (len(cartao) == 16):
+            if (cartao[0:1]) in ["51", "52", "53", "54", "55"]:
+                if (luhn_check(cartao) == True):
+                    print("Cartão válido.")
+        else:
+            print("Cartão inválido. Número de dígitos não correspondem ao da bandeira Master Card.")
+    if (bandeira == "Visa"):
+        if (len(cartao) in [13, 16]):
+            if (cartao[0:1]) in ["51", "52", "53", "54", "55"]:
+                if (luhn_check(cartao) == True):
+                    print("Cartão válido.")
+        else:
+            print("Cartão inválido. Número de dígitos não correspondem ao da bandeira Visa.")
+    
+    
+    
